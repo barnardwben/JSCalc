@@ -1,0 +1,79 @@
+/* Why are we using the ::before and ::after? */
+*, *::before, *::after {
+    box-sizing: border-box;
+    font-family: 'Merriweather', serif;
+    font-weight: 700;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    background: linear-gradient(to right, #00AAFF, #00AA6C);
+}
+
+.calculator-grid {
+    display: grid;
+    justify-content: center;
+    /* Changed from align-items to align-content
+    because we want to align the entire content in
+    center not the items themselves. */
+    align-content: center;
+    min-height: 100vh;
+    grid-template-columns: repeat(4, 100px);
+    /* minmax in this instance is setting
+    min height since it's a row to 120px, and the max
+    is auto, so it will fit what it has to.  */
+    grid-template-rows: minmax(120px, auto) repeat(5, 100px);
+}
+
+.calculator-grid > button {
+    cursor: pointer;
+    font-size: 2rem;
+    border: 1px solid white;
+    outline: none;
+    background-color: rgba(255, 255, 255, .75);
+}
+
+.calculator-grid > button:hover {
+    background-color: rgba(255, 255, 255, .9);
+}
+
+.span-two {
+    grid-column: span 2;
+}
+
+.output {
+    /* We can apparently enter in negative numbers
+    to adjust our column positioning. It looks 
+    like it does the same thing as entering in
+    grid-column: 1 / 5; (though not sure it is the same)*/
+    grid-column: 1 / -1;
+    background-color: rgba(0, 0, 0, .75);
+    /* We use flex to align the elements within
+    the output. */
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    /* To align our items vertically we use
+    flex-direction. */
+    flex-direction: column;
+    padding: 10px;
+    /* If our items get to long we want them to wrap,
+    we can use word-wrap to clarify when are words
+    should wrap, and in this case we want our words
+    to break in the middle (so not just at the end or
+    when we use a space. */
+    word-wrap: break-word;
+    /* Research what this property does */
+    word-break: break-all;
+}
+
+.output .previous-operand {
+    color: rgba(255, 255, 255, .75);
+    font-size: 1.5rem;
+}
+
+.output .current-operand {
+    color: white;
+    font-size: 2.5rem;
+}
